@@ -1,0 +1,16 @@
+version: '3'
+services:
+  php-service:
+    container_name: php-service
+    image: php-service
+    restart: always
+    command: ['php-fpm']
+  php-web:
+    container_name: php-web
+    image: php-web
+    restart: always
+    depends_on:
+      - php-service
+    command: ['nginx', '-g', 'daemon off;']
+    ports:
+      - "10100:80"
